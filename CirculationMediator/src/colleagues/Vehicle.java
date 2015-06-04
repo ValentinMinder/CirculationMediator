@@ -12,16 +12,25 @@ import mediator.IMediator;
  * @brief A type of concrete colleague, that represents a moving vehicle.
  */
 
-public class Vehicle extends IColleague {
+public class Vehicle extends MovingColleague {
 
 	public Vehicle(IMediator mediator) {
 		super(mediator);
 	}
 
 	@Override
-	public void receive(String simpleMessage) {
-		System.out.println(this.getClass().getName() + " " + this
-				+ " recieved: " + simpleMessage);
+	public void move() {
+		// TO IMPLEMENT
+	}
+
+	@Override
+	public void stop() {
+
+	}
+
+	@Override
+	public void start() {
+
 	}
 
 }
