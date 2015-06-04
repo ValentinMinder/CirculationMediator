@@ -12,15 +12,25 @@ import mediator.IMediator;
  * @brief A type of concrete colleague, that represent a pedestrian...
  */
 
-public class Pedestrian extends IColleague {
+public class Pedestrian extends MovingColleague {
 
 	public Pedestrian(IMediator mediator) {
 		super(mediator);
 	}
 
 	@Override
-	public void receive(String simpleMessage) {
-		System.out.println(this.getClass().getName() + " " + this
-				+ " recieved: " + simpleMessage);
+	public void move() {
+
 	}
+
+	@Override
+	public void stop() {
+
+	}
+
+	@Override
+	public void start() {
+
+	}
+
 }

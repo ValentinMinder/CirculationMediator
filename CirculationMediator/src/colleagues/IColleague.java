@@ -18,10 +18,21 @@ public abstract class IColleague {
 		mediator = med;
 	}
 
-	abstract public void receive(String simpleMessage);
+	public void registerMediator(IMediator med){
+		mediator = med;
+	}
+
+	public void receive(String simpleMessage){
+		System.out.println(this + " recieved: " + simpleMessage);
+	}
 
 	public void broadcast(String simpleMessage) {
 		System.out.println(this + " sends a broadcast: " + simpleMessage);
 		mediator.broadcast(this, simpleMessage);
+	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
 	}
 }
