@@ -1,6 +1,8 @@
 package colleagues;
 
 import java.util.Observable;
+
+import protocol.KeepAliveData;
 import mediator.IMediator;
 
 /**
@@ -12,7 +14,20 @@ public abstract class MovingColleague extends IColleague {
         super(med);
     }
 
-    public abstract void move();
+    public void move() {
+    	zone.move();
+    }
+
+    @Override
+	public void receiveKeepAlive(KeepAliveData data) {
+		super.receiveKeepAlive(data);
+		if (zone.willBeContainedIn(data.getZone())){
+			// I should stop in order to avoid problems...
+			stop();
+			System.out.println("I have someone on my road. I stopped.");
+			// TODO: program the re-start in a while if no other stop.
+		}
+	}
 
     public abstract void stop();
 

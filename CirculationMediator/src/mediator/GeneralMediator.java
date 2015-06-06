@@ -80,8 +80,7 @@ public class GeneralMediator extends IMediator {
 		// broadcast KeepAlive
 		for (IColleague iColleague : colleagues) {
 			if (iColleague != sender) { // comparaison de référence ok!
-				// TODO: colleagues must recieves keepalive data!
-				// iColleague.receiveKeepAlive(data);
+				iColleague.receiveKeepAlive(data);
 			}
 		}
 	}
