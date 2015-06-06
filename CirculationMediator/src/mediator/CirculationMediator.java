@@ -4,6 +4,7 @@ import protocol.KeepAliveData;
 import protocol.Zone2D;
 import colleagues.IColleague;
 import colleagues.NonMovingColleague;
+import colleagues.Train;
 
 /**
  * 
@@ -55,5 +56,23 @@ public abstract class CirculationMediator extends IMediator {
 	public void switchMoveEveryOneInArea(NonMovingColleague sender,
 			Zone2D area, boolean stop) {
 		generalMediator.switchMoveEveryOneInArea(sender, area, stop);
+	}
+	
+	@Override
+	public boolean registerColleague(IColleague colleague) {
+		return super.registerColleague(colleague);
+	}
+	
+	public boolean registerColleague(Train colleague) {
+		return super.registerColleague(colleague);
+	}
+
+	@Override
+	public boolean unRegisterColleague(IColleague colleague) {
+		return super.unRegisterColleague(colleague);
+	}
+	
+	public boolean unRegisterColleague(Train colleague) {
+		return super.unRegisterColleague(colleague);
 	}
 }

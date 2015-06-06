@@ -1,34 +1,54 @@
 package mediator;
 
-import colleagues.Barrier;
+import protocol.KeepAliveData;
 import protocol.Zone2D;
+import colleagues.Barrier;
+import colleagues.IColleague;
+import colleagues.Train;
 
 /**
  * Train crossing regulated with barriers.
  */
 public class TrainCrossingMediator extends CirculationMediator {
 
-	private Barrier rightBarrier;
-	private Barrier leftBarrier;
+	private Barrier rightBarrier = new Barrier(this);
+	private Barrier leftBarrier = new Barrier(this);
 
 	public TrainCrossingMediator(GeneralMediator superMediator, Zone2D zone) {
 		super(superMediator, zone);
 	}
 
-	public void trainArrives() {
-		// TODO: fermer les barrieres.
+	@Override
+	public void keepAlive(IColleague sender, KeepAliveData data) {
+		super.keepAlive(sender, data);
+		// if the sender will be in the area of the barrier and its closed: stop.
+		if (!rightBarrier.isOpen()
+				&& sender.getZone().willBeContainedIn(rightBarrier.getZone())) {
+			sender.switchMove(true);
+		} else if (!leftBarrier.isOpen()
+				&& sender.getZone().willBeContainedIn(rightBarrier.getZone())) {
+			sender.switchMove(true);
+		}
 	}
 
-	public void barrierIsClosed() {
-		// TODO: stopper tout le monde!
+	public boolean registerColleague(Train colleague) {
+		trainArrives();
+		return super.registerColleague(colleague);
 	}
 
-	public void barrierIsOpen() {
-		// TODO: demarrer tout le monde!
+	public boolean unRegisterColleague(Train colleague) {
+		trainLeaves();
+		return super.unRegisterColleague(colleague);
 	}
 
-	public void trainLeaves() {
-		// TODO: ouvrir les barrieres
+	private void trainArrives() {
+		rightBarrier.switchOpen(false);
+		leftBarrier.switchOpen(false);
+	}
+
+	private void trainLeaves() {
+		rightBarrier.switchOpen(true);
+		leftBarrier.switchOpen(true);
 	}
 
 }
