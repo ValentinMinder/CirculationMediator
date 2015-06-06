@@ -1,6 +1,7 @@
 
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -15,13 +16,17 @@ public class BackgroundImagePanel extends JPanel {
     
     private BufferedImage backgroundPicture;
     
+    private static final int BACKGROUND_HEIGTH = 600;
+    private static final int BACKGROUND_WIDTH = 1200;
+    
     public BackgroundImagePanel(String fileName) {
         
         backgroundPicture = null;
         
         try {
-            backgroundPicture = ImageIO.read(new File(fileName));            
-            setPreferredSize(new Dimension(backgroundPicture.getWidth(), backgroundPicture.getHeight()));
+            backgroundPicture = ImageIO.read(new File(fileName));
+            setBackground(Color.WHITE);
+            setPreferredSize(new Dimension(BACKGROUND_WIDTH, BACKGROUND_HEIGTH));
         } catch (IOException ex) {
             Logger.getLogger(BackgroundImagePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -30,6 +35,6 @@ public class BackgroundImagePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(backgroundPicture, 0, 0, this);
+        g.drawImage(backgroundPicture, 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGTH, this);
     }
 }

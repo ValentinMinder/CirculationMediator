@@ -1,5 +1,7 @@
 package colleagues;
 
+import java.util.Observable;
+import java.util.Observer;
 import mediator.IMediator;
 
 /**
@@ -12,27 +14,44 @@ import mediator.IMediator;
  * @brief Generic Abstract Class for Colleagues
  */
 public abstract class IColleague {
-	protected IMediator mediator;
 
-	public IColleague(IMediator med) {
-		mediator = med;
-	}
+    protected IMediator mediator;
+    
+    // Observable pour les vues
+    private final Observable viewObservable = new Observable() {
+        @Override
+        public void setChanged() {
+            super.setChanged();
+        }
+    };
 
-	public void registerMediator(IMediator med){
-		mediator = med;
-	}
+    public IColleague(IMediator med) {
+        mediator = med;
+    }
 
-	public void receive(String simpleMessage){
-		System.out.println(this + " recieved: " + simpleMessage);
-	}
+    public void registerMediator(IMediator med) {
+        mediator = med;
+    }
 
-	public void broadcast(String simpleMessage) {
-		System.out.println(this + " sends a broadcast: " + simpleMessage);
-		mediator.broadcast(this, simpleMessage);
-	}
+    public void receive(String simpleMessage) {
+        System.out.println(this + " recieved: " + simpleMessage);
+    }
 
-	@Override
-	public String toString() {
-		return this.getClass().getSimpleName();
-	}
+    public void broadcast(String simpleMessage) {
+        System.out.println(this + " sends a broadcast: " + simpleMessage);
+        mediator.broadcast(this, simpleMessage);
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+    
+    public void addViewObserver(Observer view) {
+        viewObservable.addObserver(view);
+    }
+    
+    protected void notifyViewObservers() {
+        viewObservable.notifyObservers();
+    }
 }
