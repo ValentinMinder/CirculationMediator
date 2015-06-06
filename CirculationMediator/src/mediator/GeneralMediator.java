@@ -1,5 +1,10 @@
 package mediator;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import protocol.KeepAliveData;
+import protocol.Zone2D;
 import colleagues.IColleague;
 import colleagues.Pedestrian;
 import colleagues.Vehicle;
@@ -15,6 +20,8 @@ import colleagues.Vehicle;
  */
 
 public class GeneralMediator extends IMediator {
+	// list of mediator
+	private Collection<CirculationMediator> mediators;
 
 	IColleague v = new Vehicle(this);
 	IColleague p = new Pedestrian(this);
@@ -22,13 +29,21 @@ public class GeneralMediator extends IMediator {
 	/* INSTANCIATION */
 	public GeneralMediator() {
 		super();
+		// creation of specialized mediators.
+		mediators = new ArrayList<CirculationMediator>();
+		mediators.add(new CirculationMediator(this,
+				new Zone2D(30.0, 20.0, 8, 9)));
+		mediators.add(new CirculationMediator(this,
+				new Zone2D(60.0, 40.0, 8, 4)));
+
+		// TODO: colleague must be instanciated with a "zone"
 		v = new Vehicle(this);
 		p = new Pedestrian(this);
-		register(v);
-		register(p);
-		register(new Vehicle(this));
-		register(new Vehicle(this));
-		register(new Pedestrian(this));
+		registerColleague(v);
+		registerColleague(p);
+		registerColleague(new Vehicle(this));
+		registerColleague(new Vehicle(this));
+		registerColleague(new Pedestrian(this));
 	}
 
 	private void start() throws InterruptedException {
@@ -47,11 +62,41 @@ public class GeneralMediator extends IMediator {
 	}
 
 	@Override
-	public void broadcast(IColleague sender, String payload) {
-		for (IColleague colleague : colleagues) {
-			if (colleague != sender) {
-				colleague.receive(payload);
+	public void keepAlive(IColleague sender, KeepAliveData data) {
+		checkZone(sender, data);
+		broadcastKeepAlive(sender, data);
+	}
+
+	/**
+	 * Broadcast the keep-alive message to ALL colleagues, no matter their
+	 * current mediator.
+	 * 
+	 * @param sender
+	 *            the sender
+	 * @param data
+	 *            keep-alive data.
+	 */
+	protected void broadcastKeepAlive(IColleague sender, KeepAliveData data) {
+		// broadcast KeepAlive
+		for (IColleague iColleague : colleagues) {
+			if (iColleague != sender) { // comparaison de référence ok!
+				// TODO: colleagues must recieves keepalive data!
+				// iColleague.receiveKeepAlive(data);
 			}
 		}
+	}
+
+	@Override
+	protected boolean checkZone(IColleague colleague, KeepAliveData data) {
+		for (CirculationMediator mediator : mediators) {
+			if (data.getZone().isContainedIn(mediator.getZone())) {
+				// new mediator for subject
+				colleague.registerMediator(mediator);
+				// specialized mediator has a new subject
+				mediator.registerColleague(colleague);
+				return false;
+			}
+		}
+		return true;
 	}
 }
