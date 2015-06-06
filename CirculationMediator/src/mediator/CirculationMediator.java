@@ -10,8 +10,7 @@ import colleagues.IColleague;
  * to the type of mediator/regulation in the sub-classes.)
  *
  */
-// TODO: should become abstract.
-public class CirculationMediator extends IMediator {
+public abstract class CirculationMediator extends IMediator {
 
 	// reference to the main mediator
 	private GeneralMediator generalMediator;

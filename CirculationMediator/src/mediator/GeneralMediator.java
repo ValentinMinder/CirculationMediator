@@ -31,10 +31,12 @@ public class GeneralMediator extends IMediator {
 		super();
 		// creation of specialized mediators.
 		mediators = new ArrayList<CirculationMediator>();
-		mediators.add(new CirculationMediator(this,
+		mediators.add(new AutoRegulatedMediator(this,
 				new Zone2D(30.0, 20.0, 8, 9)));
-		mediators.add(new CirculationMediator(this,
+		mediators.add(new TrafficLightMediator(this,
 				new Zone2D(60.0, 40.0, 8, 4)));
+		mediators.add(new TrainCrossingMediator(this,
+				new Zone2D(80.0, 70.0, 3, 9)));
 
 		// TODO: colleague must be instanciated with a "zone"
 		v = new Vehicle(this);
