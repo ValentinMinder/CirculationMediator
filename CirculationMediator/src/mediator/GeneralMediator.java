@@ -14,13 +14,13 @@ import colleagues.Vehicle;
  * @brief Concrete Mediator
  */
 
-public class Mediator extends IMediator {
+public class GeneralMediator extends IMediator {
 
 	IColleague v = new Vehicle(this);
 	IColleague p = new Pedestrian(this);
 
 	/* INSTANCIATION */
-	public Mediator() {
+	public GeneralMediator() {
 		super();
 		v = new Vehicle(this);
 		p = new Pedestrian(this);
@@ -40,7 +40,7 @@ public class Mediator extends IMediator {
 
 	public static void main(String[] args) {
 		try {
-			new Mediator().start();
+			new GeneralMediator().start();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
