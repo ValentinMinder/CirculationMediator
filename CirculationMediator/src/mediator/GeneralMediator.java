@@ -6,6 +6,7 @@ import java.util.Collection;
 import protocol.KeepAliveData;
 import protocol.Zone2D;
 import colleagues.IColleague;
+import colleagues.NonMovingColleague;
 import colleagues.Pedestrian;
 import colleagues.Vehicle;
 
@@ -99,5 +100,16 @@ public class GeneralMediator extends IMediator {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void switchMoveEveryOneInArea(NonMovingColleague sender,
+			Zone2D area, boolean stop) {
+		for (IColleague iColleague : colleagues) {
+			if (iColleague != sender
+					&& iColleague.getZone().isContainedIn(area)) {
+				iColleague.switchMove(stop);
+			}
+		}
 	}
 }

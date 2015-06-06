@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import protocol.KeepAliveData;
+import protocol.Zone2D;
 import colleagues.IColleague;
+import colleagues.NonMovingColleague;
 
 /**
  * @university Univesity of Applied Sciences Western Switzerland (HES-SO)
@@ -81,6 +83,15 @@ public abstract class IMediator {
 	 */
 	protected abstract boolean checkZone(IColleague colleague,
 			KeepAliveData data);
+	
+	/**
+	 * Switch the move/stop of all moving object in the given area.
+	 * @param sender a non-moving object requesting
+	 * @param area the concerned area
+	 * @param stop true if must stop, false is must start.
+	 */
+	public abstract void switchMoveEveryOneInArea(NonMovingColleague sender,
+			Zone2D area, boolean stop);
 
 	// TODO complete with other methods
 }

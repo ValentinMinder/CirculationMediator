@@ -9,13 +9,17 @@ import mediator.IMediator;
  * Created by paulnta on 04.06.15.
  */
 public abstract class MovingColleague extends IColleague {
+
+	boolean isMoving = true;
     
     public MovingColleague(IMediator med) {
         super(med);
     }
 
     public void move() {
-    	zone.move();
+    	if (isMoving) {
+    		zone.move();
+    	}
     }
 
     @Override
@@ -29,7 +33,19 @@ public abstract class MovingColleague extends IColleague {
 		}
 	}
 
-    public abstract void stop();
+    public void stop() {
+    	isMoving = false;
+    }
 
-    public abstract void start();
+    public void start() {
+    	isMoving = true;
+    }
+    
+    public void switchMove(boolean stopped) {
+    	if (stopped) {
+    		stop();
+    	} else {
+    		move();
+    	}
+    }
 }

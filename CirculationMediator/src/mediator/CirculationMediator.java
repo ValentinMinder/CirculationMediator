@@ -3,6 +3,7 @@ package mediator;
 import protocol.KeepAliveData;
 import protocol.Zone2D;
 import colleagues.IColleague;
+import colleagues.NonMovingColleague;
 
 /**
  * 
@@ -48,5 +49,11 @@ public abstract class CirculationMediator extends IMediator {
 	 */
 	protected Zone2D getZone() {
 		return myInfluenceZone;
+	}
+	
+	@Override
+	public void switchMoveEveryOneInArea(NonMovingColleague sender,
+			Zone2D area, boolean stop) {
+		generalMediator.switchMoveEveryOneInArea(sender, area, stop);
 	}
 }

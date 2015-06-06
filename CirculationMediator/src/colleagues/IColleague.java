@@ -81,4 +81,8 @@ public abstract class IColleague {
     protected void notifyViewObservers() {
         viewObservable.notifyObservers();
     }
+    
+    public void switchMove(boolean stopped) {
+    	// does nothing.
+    }
 }
