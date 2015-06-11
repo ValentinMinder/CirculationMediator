@@ -16,6 +16,5 @@ public class VehicleView extends View {
 
     @Override
     public void draw(Graphics g) {
-        // TODO
     }
 }

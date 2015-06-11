@@ -15,7 +15,6 @@ public class PedestrianView extends View {
     
     private static BufferedImage imgPedestrian;
 
-    // Bloc statique pour l'initialisation de l'image
     static {
         try {
             imgPedestrian = ImageIO.read(new File("imgPedestrian.png"));

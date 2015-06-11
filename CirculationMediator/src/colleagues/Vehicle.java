@@ -18,19 +18,4 @@ public class Vehicle extends MovingColleague {
 		super(mediator);
 	}
 
-	@Override
-	public void move() {
-		// TO IMPLEMENT
-	}
-
-	@Override
-	public void stop() {
-
-	}
-
-	@Override
-	public void start() {
-
-	}
-
 }

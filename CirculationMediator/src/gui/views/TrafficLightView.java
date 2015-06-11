@@ -15,5 +15,6 @@ public class TrafficLightView extends View {
 
     @Override
     public void draw(Graphics g) {
+        // TODO
     }
 }

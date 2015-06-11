@@ -17,20 +17,4 @@ public class Pedestrian extends MovingColleague {
 	public Pedestrian(IMediator mediator) {
 		super(mediator);
 	}
-
-	@Override
-	public void move() {
-
-	}
-
-	@Override
-	public void stop() {
-
-	}
-
-	@Override
-	public void start() {
-
-	}
-
 }
