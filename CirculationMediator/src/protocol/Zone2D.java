@@ -104,7 +104,6 @@ public class Zone2D {
 	}
 
 	/* GETTERS & SETTERS */
-
 	public double getCoordX() {
 		return coordX;
 	}

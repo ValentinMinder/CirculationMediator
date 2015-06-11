@@ -1,19 +1,19 @@
 package gui.views;
 
 import colleagues.Barrier;
-import colleagues.IColleague;
 import gui.GUICirculation;
 import java.awt.Graphics;
 
-public class BarriereView extends View {
+public class BarrierView extends View {
 
-    public BarriereView(GUICirculation parent, Barrier barrier) {
+    private final Barrier barrier;
+    
+    public BarrierView(GUICirculation parent, Barrier barrier) {
         super(parent, barrier);
+        this.barrier = barrier;
     }
 
     @Override
     public void draw(Graphics g) {
-        // TODO
-    }
-    
+    }    
 }

@@ -41,6 +41,7 @@ public abstract class MovingColleague extends IColleague {
     	isMoving = true;
     }
     
+        @Override
     public void switchMove(boolean stopped) {
     	if (stopped) {
     		stop();
