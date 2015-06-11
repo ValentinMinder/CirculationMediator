@@ -18,10 +18,10 @@ import mediator.IMediator;
  */
 public abstract class IColleague {
 
-	protected Zone2D zone = new Zone2D(0, 0, 0, 0);
-	protected KeepAliveData cachedData = new KeepAliveData(zone);
+    protected Zone2D zone = new Zone2D(0, 0, 0, 0);
+    protected KeepAliveData cachedData = new KeepAliveData(zone);
     protected IMediator mediator;
-    
+
     // Observable pour les vues
     private final Observable viewObservable = new Observable() {
         @Override
@@ -38,27 +38,29 @@ public abstract class IColleague {
         mediator = med;
     }
 
-	/** sends a keepalive to the mediator */
-	public void issueKeepAlive() {
-		mediator.keepAlive(this, cachedData);
-	}
+    /**
+     * sends a keepalive to the mediator
+     */
+    public void issueKeepAlive() {
+        mediator.keepAlive(this, cachedData);
+    }
 
-	public void receiveKeepAlive(KeepAliveData data) {
-		if (data.getZone().isContainedIn(zone)) {
+    public void receiveKeepAlive(KeepAliveData data) {
+        if (data.getZone().isContainedIn(zone)) {
 			// woooups... accident!
-			// TODO: destroy / stop / images / ...
-			System.out.println(this + " - Accdident");
-		}
-	}
+            // TODO: destroy / stop / images / ...
+            System.out.println(this + " - Accdident");
+        }
+    }
 
-	public Zone2D getZone() {
-		return zone;
-	}
+    public Zone2D getZone() {
+        return zone;
+    }
 
-	public void setZone(Zone2D zone) {
-		cachedData = new KeepAliveData(zone);
-		this.zone = zone;
-	}
+    public void setZone(Zone2D zone) {
+        cachedData = new KeepAliveData(zone);
+        this.zone = zone;
+    }
 
     public void receive(String simpleMessage) {
         System.out.println(this + " recieved: " + simpleMessage);
@@ -73,16 +75,16 @@ public abstract class IColleague {
     public String toString() {
         return this.getClass().getSimpleName();
     }
-    
+
     public void addViewObserver(Observer view) {
         viewObservable.addObserver(view);
     }
-    
+
     protected void notifyViewObservers() {
         viewObservable.notifyObservers();
     }
-    
+
     public void switchMove(boolean stopped) {
-    	// does nothing.
+        // does nothing.
     }
 }

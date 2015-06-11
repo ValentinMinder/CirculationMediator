@@ -10,43 +10,43 @@ import mediator.IMediator;
  */
 public abstract class MovingColleague extends IColleague {
 
-	boolean isMoving = true;
-    
+    private boolean isMoving = true;
+
     public MovingColleague(IMediator med) {
         super(med);
     }
 
     public void move() {
-    	if (isMoving) {
-    		zone.move();
-    	}
+        if (isMoving) {
+            zone.move();
+        }
     }
 
     @Override
-	public void receiveKeepAlive(KeepAliveData data) {
-		super.receiveKeepAlive(data);
-		if (zone.willBeContainedIn(data.getZone())){
-			// I should stop in order to avoid problems...
-			stop();
-			System.out.println("I have someone on my road. I stopped.");
-			// TODO: program the re-start in a while if no other stop.
-		}
-	}
+    public void receiveKeepAlive(KeepAliveData data) {
+        super.receiveKeepAlive(data);
+        if (zone.willBeContainedIn(data.getZone())) {
+            // I should stop in order to avoid problems...
+            stop();
+            System.out.println("I have someone on my road. I stopped.");
+            // TODO: program the re-start in a while if no other stop.
+        }
+    }
 
     public void stop() {
-    	isMoving = false;
+        isMoving = false;
     }
 
     public void start() {
-    	isMoving = true;
+        isMoving = true;
     }
-    
-        @Override
+
+    @Override
     public void switchMove(boolean stopped) {
-    	if (stopped) {
-    		stop();
-    	} else {
-    		move();
-    	}
+        if (stopped) {
+            stop();
+        } else {
+            move();
+        }
     }
 }
