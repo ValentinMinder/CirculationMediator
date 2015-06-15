@@ -4,16 +4,18 @@ import gui.views.View;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JFrame;
 
 public class GUICirculation extends JFrame {
 
-    private final LinkedList<View> viewsToDraw;
+    private final List<View> viewsToDraw;
 
     public GUICirculation() {
 
-        viewsToDraw = new LinkedList<>();
+    	Controller c = Controller.getInstance(this);
+    	new Thread(c).start();
+        viewsToDraw = c.getListViews();
         add(new BackgroundImagePanel("roadBackground.png"));
         
         setResizable(false);

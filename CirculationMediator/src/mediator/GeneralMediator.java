@@ -1,5 +1,7 @@
 package mediator;
 
+import gui.Controller;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -7,8 +9,6 @@ import protocol.KeepAliveData;
 import protocol.Zone2D;
 import colleagues.IColleague;
 import colleagues.NonMovingColleague;
-import colleagues.Pedestrian;
-import colleagues.Vehicle;
 
 /**
  * @university Univesity of Applied Sciences Western Switzerland (HES-SO)
@@ -24,44 +24,27 @@ public class GeneralMediator extends IMediator {
 	// list of mediator
 	private Collection<CirculationMediator> mediators;
 
-	IColleague v = new Vehicle(this);
-	IColleague p = new Pedestrian(this);
-
+	/* SINGLETON */
+	private static GeneralMediator instance;
+	public static GeneralMediator getInstance () {
+		if (null == instance) {
+			synchronized (Controller.class) {
+				if (null == instance) {
+					instance = new GeneralMediator();
+				}
+			}
+		}
+		return instance;
+	}
 	/* INSTANCIATION */
-	public GeneralMediator() {
+	private GeneralMediator() {
 		super();
 		// creation of specialized mediators.
 		mediators = new ArrayList<CirculationMediator>();
-		mediators.add(new AutoRegulatedMediator(this,
-				new Zone2D(30.0, 20.0, 8, 9)));
-		mediators.add(new TrafficLightMediator(this,
-				new Zone2D(60.0, 40.0, 8, 4)));
-		mediators.add(new TrainCrossingMediator(this,
-				new Zone2D(80.0, 70.0, 3, 9)));
-
-		// TODO: colleague must be instanciated with a "zone"
-		v = new Vehicle(this);
-		p = new Pedestrian(this);
-		registerColleague(v);
-		registerColleague(p);
-		registerColleague(new Vehicle(this));
-		registerColleague(new Vehicle(this));
-		registerColleague(new Pedestrian(this));
 	}
-
-	private void start() throws InterruptedException {
-		Thread.sleep(1000);
-		v.broadcast("Wroum wroum from " + v);
-		Thread.sleep(1000);
-		p.broadcast("Pfiuu!! I run away from " + p);
-	}
-
-	public static void main(String[] args) {
-		try {
-			new GeneralMediator().start();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	
+	public void addMediator (CirculationMediator mediator) {
+		mediators.add(mediator);
 	}
 
 	@Override

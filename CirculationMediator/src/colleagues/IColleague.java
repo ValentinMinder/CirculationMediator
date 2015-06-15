@@ -25,8 +25,15 @@ public abstract class IColleague {
     // Observable pour les vues
     private final Observable viewObservable = new Observable() {
         @Override
-        public void setChanged() {
-            super.setChanged();
+        public void notifyObservers() {
+        	super.setChanged();
+        	super.notifyObservers();
+        }
+        
+        @Override
+        public void notifyObservers(Object arg) {
+        	super.setChanged();
+        	super.notifyObservers(arg);
         }
     };
 
@@ -82,6 +89,10 @@ public abstract class IColleague {
 
     protected void notifyViewObservers() {
         viewObservable.notifyObservers();
+    }
+    
+    protected void notifyViewObservers(Object arg) {
+        viewObservable.notifyObservers(arg);
     }
 
     public void switchMove(boolean stopped) {

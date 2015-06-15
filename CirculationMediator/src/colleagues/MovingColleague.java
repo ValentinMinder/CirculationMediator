@@ -19,6 +19,7 @@ public abstract class MovingColleague extends IColleague {
     public void move() {
         if (isMoving) {
             zone.move();
+            notifyViewObservers();
         }
     }
 

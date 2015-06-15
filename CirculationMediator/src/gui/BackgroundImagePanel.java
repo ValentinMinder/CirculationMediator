@@ -16,8 +16,8 @@ public class BackgroundImagePanel extends JPanel {
     
     private BufferedImage backgroundPicture;
     
-    private static final int BACKGROUND_HEIGTH = 600;
-    private static final int BACKGROUND_WIDTH = 1200;
+    public static final int BACKGROUND_HEIGTH = 600;
+    public static final int BACKGROUND_WIDTH = 1200;
     
     public BackgroundImagePanel(String fileName) {
         

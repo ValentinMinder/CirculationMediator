@@ -1,0 +1,147 @@
+package gui;
+
+import gui.views.*;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import mediator.*;
+import protocol.Zone2D;
+import colleagues.*;
+
+public class Controller implements Runnable {
+
+	private List<MovingColleague> listColleague = new LinkedList<MovingColleague>();
+	private List<View> listViews = new LinkedList<View>();
+
+	public List<View> getListViews() {
+		return listViews;
+	}
+
+	/* SINGLETON */
+	private static Controller instance;
+
+	public static Controller getInstance(GUICirculation gui) {
+		if (null == instance) {
+			synchronized (Controller.class) {
+				if (null == instance) {
+					instance = new Controller(gui);
+				}
+			}
+		}
+		return instance;
+	}
+
+	private Controller(GUICirculation gui) {
+		// mediateur principal
+		GeneralMediator med = GeneralMediator.getInstance();
+
+		// sucre syntaxique (simplification)
+		double w = BackgroundImagePanel.BACKGROUND_WIDTH;
+		double h = BackgroundImagePanel.BACKGROUND_HEIGTH;
+
+		/* MEDIATORS */
+
+		AutoRegulatedMediator autoMed = new AutoRegulatedMediator(med,
+				new Zone2D(2 * w / 6, 4 * h / 9, h / 9, h / 9));
+		med.addMediator(autoMed);
+
+		TrafficLightMediator lightMed = new TrafficLightMediator(med,
+				new Zone2D(4 * w / 6, 4 * h / 9, h / 9, h / 9));
+		med.addMediator(lightMed);
+
+		TrainCrossingMediator trainMed = new TrainCrossingMediator(med,
+				new Zone2D(9 * w / 20, 4 * h / 9, h / 9, h / 9));
+		med.addMediator(trainMed);
+
+		/* TRAFFIC LIGHTS */
+
+		TrafficLight traffic;
+		View v;
+
+		traffic = new TrafficLight(lightMed);
+		traffic.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, 4 * h / 9, h / 9 / 3,
+				h / 9 / 3));
+		v = new TrafficLightView(gui, traffic);
+		listViews.add(v);
+
+		traffic = new TrafficLight(lightMed);
+		traffic.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, 4 * h / 9 + 2 * h / 9
+				/ 3, h / 9 / 3, h / 9 / 3));
+		v = new TrafficLightView(gui, traffic);
+		listViews.add(v);
+
+		traffic = new TrafficLight(lightMed);
+		traffic.setZone(new Zone2D(4 * w / 6, 4 * h / 9 + h / 9 / 3, h / 9 / 3,
+				h / 9 / 3));
+		v = new TrafficLightView(gui, traffic);
+		listViews.add(v);
+
+		traffic = new TrafficLight(lightMed);
+		traffic.setZone(new Zone2D(4 * w / 6 + 2 * h / 9 / 3, 4 * h / 9 + h / 9
+				/ 3, h / 9 / 3, h / 9 / 3));
+		v = new TrafficLightView(gui, traffic);
+		listViews.add(v);
+
+		/* VEHICLES & OTHER MOVING */
+
+		MovingColleague c;
+
+		c = new Train(med);
+		c.setZone(new Zone2D(w / 2 - 10, h, 20, 100, 0, -10));
+		listColleague.add(c);
+		v = new TrainView(gui, (Train) c);
+		listViews.add(v);
+
+		c = new Train(med);
+		c.setZone(new Zone2D(w / 2 - 10, -100, 20, 100, 0, 10));
+		listColleague.add(c);
+		v = new TrainView(gui, (Train) c);
+		listViews.add(v);
+
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(-10, h / 2 + 10, 10, 7, 3, 0));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w + 10, h / 2 - 10, 10, 7, -3, 0));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, -10, 7, 10, 0, 3));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(5 * w / 6, h, 25, 50, 0, -2.5));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+
+		// TODO: add barrieres +
+		// zones de contact pour priorité droite et passage piéton.
+	}
+
+	// refresh des figures qui avancent
+	@Override
+	public void run() {
+		long interval = 500; // target: 40 = 1/25 sec
+		while (true) {
+			for (MovingColleague movingColleague : listColleague) {
+				movingColleague.move();
+			}
+			try {
+				Thread.sleep(interval);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+}
