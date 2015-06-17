@@ -100,19 +100,19 @@ public class Controller implements Runnable {
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(-10, h / 2 + 10, 10, 7, 3, 0));
+		c.setZone(new Zone2D(-10, h / 2 + 10, 90, 45, 3, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w + 10, h / 2 - 10, 10, 7, -3, 0));
+		c.setZone(new Zone2D(w + 10, h / 2 - 10, 90, 45, -3, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, -10, 7, 10, 0, 3));
+		c.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, -10, 90, 45, 0, 3));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
