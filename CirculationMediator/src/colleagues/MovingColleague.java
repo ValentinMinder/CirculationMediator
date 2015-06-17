@@ -46,7 +46,7 @@ public abstract class MovingColleague extends IColleague {
         if (!isExploded && data.getZone().isContainedIn(zone)) {
 			// woooups... accident!
             // TODO: destroy / stop / images / ...
-            System.out.println(this + " - Accdident");
+            System.err.println(this + " - woooups! Accdident! I explode!");
             isExploded = true;
             isMoving = false;
             notifyViewObservers();
@@ -61,11 +61,12 @@ public abstract class MovingColleague extends IColleague {
             if (null != tt) {
             	tt.cancel();
             }
+            final MovingColleague t = this;
             tt = new TimerTask() {
 				
 				@Override
 				public void run() {
-					System.err.println(this + " - I have waited. I'll try again to move.");
+					System.err.println(t.toString() + " - I have waited. I'll try again to move.");
 					start();
 					
 				}

@@ -60,29 +60,29 @@ public class Controller implements Runnable {
 		View v;
 
 		traffic = new TrafficLight(lightMed);
-		traffic.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, 4 * h / 9, h / 9 / 3,
+		traffic.setZone(new Zone2D(4 * w / 6 - 10, 4 * h / 9 + 5*h/9/3, h / 9 / 3,
+				h / 9));
+		v = new TrafficLightView(gui, traffic);
+		listViews.add(v);
+		med.registerColleague(traffic);
+
+		traffic = new TrafficLight(lightMed);
+		traffic.setZone(new Zone2D(4 * w / 6 - 2 * h / 9 / 3 - 5, 4 * h / 9 - 3 * h / 9
+				/ 3, h / 9 / 3, h / 9));
+		v = new TrafficLightView(gui, traffic);
+		listViews.add(v);
+		med.registerColleague(traffic);
+
+		traffic = new TrafficLight(lightMed);
+		traffic.setZone(new Zone2D(4 * w / 6 - 6* h/9/3, 4 * h / 9 + 3 * h / 9 / 3, h / 9 ,
 				h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
 		med.registerColleague(traffic);
 
 		traffic = new TrafficLight(lightMed);
-		traffic.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, 4 * h / 9 + 2 * h / 9
-				/ 3, h / 9 / 3, h / 9 / 3));
-		v = new TrafficLightView(gui, traffic);
-		listViews.add(v);
-		med.registerColleague(traffic);
-
-		traffic = new TrafficLight(lightMed);
-		traffic.setZone(new Zone2D(4 * w / 6, 4 * h / 9 + h / 9 / 3, h / 9 / 3,
-				h / 9 / 3));
-		v = new TrafficLightView(gui, traffic);
-		listViews.add(v);
-		med.registerColleague(traffic);
-
-		traffic = new TrafficLight(lightMed);
-		traffic.setZone(new Zone2D(4 * w / 6 + 2 * h / 9 / 3, 4 * h / 9 + h / 9
-				/ 3, h / 9 / 3, h / 9 / 3));
+		traffic.setZone(new Zone2D(4 * w / 6 +  h / 9 / 3, 4 * h / 9 + h / 9
+				/ 3, h / 9, h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
 		med.registerColleague(traffic);
@@ -131,6 +131,12 @@ public class Controller implements Runnable {
 		listViews.add(v);
 		
 		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/2 - 130, h / 2 + 30, 50, 30, 4, 0));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
 		c.setZone(new Zone2D(5* w/6, h / 2 + 30, 50, 30, 3, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
@@ -150,6 +156,12 @@ public class Controller implements Runnable {
 		
 		c = new Vehicle(med);
 		c.setZone(new Zone2D(w/2 - 100, h / 2 - 15, 50, 30, -6, 0));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/2 + 100, h / 2 - 15, 50, 30, -5, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
