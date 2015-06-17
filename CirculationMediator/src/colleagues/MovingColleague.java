@@ -48,10 +48,11 @@ public abstract class MovingColleague extends IColleague {
             // TODO: destroy / stop / images / ...
             System.out.println(this + " - Accdident");
             isExploded = true;
+            isMoving = false;
             notifyViewObservers();
         }
         
-        if (zone.willBeContainedIn(data.getZone())) {
+        if (isSignalisationAware && zone.willBeContainedIn(data.getZone())) {
             // I should stop in order to avoid problems...
             if (isMoving) {
             	System.err.println(this + " - I have someone on my road. I stopped for 10 seconds.");
