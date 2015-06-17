@@ -13,23 +13,6 @@ import javax.imageio.ImageIO;
 public class VehicleView extends View {
 
     private final Vehicle vehicle;
-    private static BufferedImage imgVehicleNorth;
-    private static BufferedImage imgVehicleEast;
-    private static BufferedImage imgVehicleSouth;
-    private static BufferedImage imgVehicleWest;
-    private static BufferedImage imgExplosion;
-
-    static {
-        try {
-            imgVehicleNorth = ImageIO.read(new File("imgVehicleNorth.png"));
-            imgVehicleEast = ImageIO.read(new File("imgVehicleEast.png"));
-            imgVehicleWest = ImageIO.read(new File("imgVehicleWest.png"));
-            imgVehicleSouth = ImageIO.read(new File("imgVehicleSouth.png"));
-            imgExplosion = ImageIO.read(new File("explosion.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(PedestrianView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public VehicleView(GUICirculation parent, Vehicle vehicle) {
         super(parent, vehicle);
@@ -42,13 +25,13 @@ public class VehicleView extends View {
         BufferedImage i;
         
         if(vehicle.getZone().getDeltaX() > 0)
-            i = imgVehicleEast;
+            i = Images.imgVehicleEast;
         else if(vehicle.getZone().getDeltaX() < 0)
-            i = imgVehicleWest;
+            i = Images.imgVehicleWest;
         else if(vehicle.getZone().getDeltaY() > 0)
-            i = imgVehicleSouth;
+            i = Images.imgVehicleSouth;
         else
-            i = imgVehicleNorth;
+            i = Images.imgVehicleNorth;
         
         g.drawImage(i,
                 vehicle.getX(),
@@ -58,13 +41,12 @@ public class VehicleView extends View {
                 null);
         
         if(vehicle.isExploded()) {
-            g.drawImage(imgExplosion,
+            g.drawImage(Images.imgExplosion,
                     vehicle.getX(), 
                     vehicle.getY(), 
                     vehicle.getWidth(), 
                     vehicle.getHeight(), 
                     null);
-            g.drawImage(imgExplosion, vehicle.getX(), vehicle.getY(), vehicle.getWidth(), vehicle.getHeight(), null);
         }
     }
 }
