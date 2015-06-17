@@ -2,11 +2,15 @@ package protocol;
 
 import gui.BackgroundImagePanel;
 
+import java.util.Random;
+
 /**
  * Represent a 2D zone with coordinates, and moving vector.
  *
  */
 public class Zone2D {
+	
+	private static Random rand = new Random();
 
 	// positition (du coin superieur gauche)
 	double coordX;
@@ -100,20 +104,21 @@ public class Zone2D {
 	/**
 	 * Move this zone with its direction (without any checking).
 	 */
-	private static double epsilon = 50.0; // 50 pixels de marges avant de revenir de l'autre côté
+	private static int epsilon = 50; // 50 pixels de marges avant de revenir de l'autre côté
 	public void move() {
 		coordX += deltaX;
 		coordY += deltaY;
+		int i = rand.nextInt(epsilon * 5);
 		if (coordX < 0 - epsilon) {
-			coordX = BackgroundImagePanel.BACKGROUND_WIDTH + epsilon;
+			coordX = BackgroundImagePanel.BACKGROUND_WIDTH + epsilon + i;
 		} else if (coordX > BackgroundImagePanel.BACKGROUND_WIDTH + epsilon) {
-			coordX = 0 - epsilon;
+			coordX = 0 - epsilon - i;
 		}
 		
 		if (coordY < 0 - epsilon) {
-			coordY = BackgroundImagePanel.BACKGROUND_HEIGTH + epsilon;
+			coordY = BackgroundImagePanel.BACKGROUND_HEIGTH + epsilon + i;
 		} else if (coordY > BackgroundImagePanel.BACKGROUND_HEIGTH + epsilon) {
-			coordY = 0 - epsilon;
+			coordY = 0 - epsilon - i;
 		}
 	}
 
