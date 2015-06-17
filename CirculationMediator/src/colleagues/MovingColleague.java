@@ -58,25 +58,26 @@ public abstract class MovingColleague extends IColleague {
             	System.err.println(this + " - I have someone on my road. I stopped for 2 seconds.");
             }
             stop();
-            if (null != tt) {
-            	tt.cancel();
-            }
-            final MovingColleague t = this;
-            tt = new TimerTask() {
-				
-				@Override
-				public void run() {
-					System.err.println(t.toString() + " - I have waited. I'll try again to move.");
-					start();
-					
-				}
-			};
-            timer.schedule(tt, 1000 * 2);
+            
         }
     }
 
+    private final MovingColleague t = this;
+
     public void stop() {
         isMoving = false;
+        if (null != tt) {
+        	tt.cancel();
+        }
+        tt = new TimerTask() {
+			
+			@Override
+			public void run() {
+				System.err.println(t.toString() + " - I have waited. I'll try again to move.");
+				start();
+			}
+		};
+        timer.schedule(tt, 1000 * 2);
     }
 
     public void start() {
@@ -88,7 +89,7 @@ public abstract class MovingColleague extends IColleague {
         if (stopped) {
             stop();
         } else {
-            move();
+            start();
         }
     }
 }
