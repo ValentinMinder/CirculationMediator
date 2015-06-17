@@ -47,7 +47,8 @@ public class Controller implements Runnable {
 		med.addMediator(autoMed);
 
 		TrafficLightMediator lightMed = new TrafficLightMediator(med,
-				new Zone2D(4 * w / 6, 4 * h / 9, h / 9, h / 9));
+				new Zone2D(4 * w / 6 - 6* h/9/3, 4 * h / 9 - 3 * h / 9
+						/ 3, h / 3, h / 3));
 		med.addMediator(lightMed);
 
 		TrainCrossingMediator trainMed = new TrainCrossingMediator(med,
@@ -59,34 +60,37 @@ public class Controller implements Runnable {
 		TrafficLight traffic;
 		View v;
 
+		// right
 		traffic = new TrafficLight(lightMed);
-		traffic.setZone(new Zone2D(4 * w / 6 - 10, 4 * h / 9 + 5*h/9/3, h / 9 / 3,
-				h / 9));
+		traffic.setZone(new Zone2D(4 * w / 6 - 13, 4 * h / 9 + 5*h/9/3, h / 9 / 2,
+				h / 9/4));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
-		med.registerColleague(traffic);
+		lightMed.addTrafficLight(traffic);
 
+		// up
 		traffic = new TrafficLight(lightMed);
-		traffic.setZone(new Zone2D(4 * w / 6 - 2 * h / 9 / 3 - 5, 4 * h / 9 - 3 * h / 9
-				/ 3, h / 9 / 3, h / 9));
+		traffic.setZone(new Zone2D(4 * w / 6 - 2 * h / 9 / 3 - 8, 4 * h / 9 - 10, h / 9 / 2, h / 9/4));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
-		med.registerColleague(traffic);
+		lightMed.addTrafficLight(traffic);
 
+		// left
 		traffic = new TrafficLight(lightMed);
-		traffic.setZone(new Zone2D(4 * w / 6 - 6* h/9/3, 4 * h / 9 + 3 * h / 9 / 3, h / 9 ,
-				h / 9 / 3));
+		traffic.setZone(new Zone2D(4 * w / 6 - 4 * h/9/3, 4 * h / 9 + 3 * h / 9 / 3 - 7, h / 9/4 ,
+				h / 9 / 2));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
-		med.registerColleague(traffic);
-
+		lightMed.addTrafficLight(traffic);
+		
+		// down
 		traffic = new TrafficLight(lightMed);
 		traffic.setZone(new Zone2D(4 * w / 6 +  h / 9 / 3, 4 * h / 9 + h / 9
-				/ 3, h / 9, h / 9 / 3));
+				/ 3 - 7, h / 9/4, h / 9 / 2));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
-		med.registerColleague(traffic);
-
+		lightMed.addTrafficLight(traffic);
+		
 		/* VEHICLES & OTHER MOVING */
 
 		MovingColleague c;
@@ -119,16 +123,10 @@ public class Controller implements Runnable {
 		/* horizontal vehciles */ 
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(-20, h / 2 + 30, 50, 30, 8, 0));
+		c.setZone(new Zone2D(-20, h / 2 + 30, 50, 30, 5, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);		
-		
-		c = new Vehicle(med);
-		c.setZone(new Zone2D(w/2 + 50, h / 2 + 30, 50, 30, 5, 0));
-		listColleague.add(c);
-		v = new VehicleView(gui, (Vehicle) c);
-		listViews.add(v);
 		
 		c = new Vehicle(med);
 		c.setZone(new Zone2D(w/2 - 130, h / 2 + 30, 50, 30, 4, 0));
@@ -143,25 +141,25 @@ public class Controller implements Runnable {
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w + 20, h / 2 - 15, 50, 30, -9, 0));
+		c.setZone(new Zone2D(w + 20, h / 2 - 15, 50, 30, -5, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w/6, h / 2 - 15, 50, 30, -3, 0));
+		c.setZone(new Zone2D(w/6, h / 2 - 15, 50, 30, -4, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w/2 - 100, h / 2 - 15, 50, 30, -6, 0));
+		c.setZone(new Zone2D(w/2 - 130, h / 2 - 15, 50, 30, -5, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w/2 + 100, h / 2 - 15, 50, 30, -5, 0));
+		c.setZone(new Zone2D(5 * w / 6, h / 2 - 15, 50, 30, -3, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
@@ -169,6 +167,12 @@ public class Controller implements Runnable {
 		/* vertical vehicles on the left */ 
 		c = new Vehicle(med);
 		c.setZone(new Zone2D(w/3 - 10, h / 6, 30, 50, 0, -3));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/3 - 10, 5 * h / 6, 30, 50, 0, -10));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
@@ -186,7 +190,13 @@ public class Controller implements Runnable {
 		listViews.add(v);
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w/3 - 50, 2*h/3 + 150, 30, 50, 0, 2));
+		c.setZone(new Zone2D(w/3 - 50, h/3 - 100, 30, 50, 0, 6));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/3 - 50, 2*h/3 + 150, 30, 50, 0, 6));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
@@ -194,25 +204,25 @@ public class Controller implements Runnable {
 		/* vertical vehicle on the right */
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(2*w/3 - 10, h / 3, 30, 50, 0, -3));
+		c.setZone(new Zone2D(2*w/3 - 10, h / 3 - 150, 30, 50, 0, -6));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(2*w/3 - 10, 2*h/3, 30, 50, 0, -6));
+		c.setZone(new Zone2D(2*w/3 - 10, 2*h/3 + 150, 30, 50, 0, -6));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(2*w/3 - 50, h/3, 30, 50, 0, 6));
+		c.setZone(new Zone2D(2*w/3 - 50, h/3 - 160, 30, 50, 0, 6));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(2*w/3 - 50, 2*h/3 + 150, 30, 50, 0, 2));
+		c.setZone(new Zone2D(2*w/3 - 50, 2*h/3 + 150, 30, 50, 0, 6));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
