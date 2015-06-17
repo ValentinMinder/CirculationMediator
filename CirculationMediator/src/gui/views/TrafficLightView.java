@@ -3,6 +3,7 @@ package gui.views;
 
 import colleagues.TrafficLight;
 import gui.GUICirculation;
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class TrafficLightView extends View {
@@ -15,6 +16,13 @@ public class TrafficLightView extends View {
 
     @Override
     public void draw(Graphics g) {
+        if(trafficLight.isGreen())
+            g.setColor(Color.green);
+        else if(trafficLight.isRed())
+            g.setColor(Color.red);
+        else
+            g.setColor(Color.orange);
+        
         g.fillRect(
                 trafficLight.getX(), 
                 trafficLight.getY(), 

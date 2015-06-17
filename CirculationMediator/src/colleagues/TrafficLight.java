@@ -17,6 +17,14 @@ public class TrafficLight extends NonMovingColleague {
 	public boolean isGreen() {
 		return current == State.GREEN;
 	}
+        
+        public boolean isOrange() {
+            return current == State.ORANGE;
+        }
+        
+        public boolean isRed() {
+            return current == State.RED;
+        }
 
 	public void green() {
 		current = State.GREEN;
