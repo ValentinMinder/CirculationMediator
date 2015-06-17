@@ -91,37 +91,191 @@ public class Controller implements Runnable {
 
 		MovingColleague c;
 
+		/* trains */
 		c = new Train(med);
 		c.setZone(new Zone2D(w / 2 - w/100, h, 20, 100, 0, -10));
 		listColleague.add(c);
 		v = new TrainView(gui, (Train) c);
 		listViews.add(v);
-
+		
 		c = new Train(med);
-		c.setZone(new Zone2D(w / 2 - 3* w / 100, -100, 20, 100, 0, 10));
+		c.setZone(new Zone2D(w / 2 - w/100, h/2, 20, 100, 0, -10));
 		listColleague.add(c);
 		v = new TrainView(gui, (Train) c);
 		listViews.add(v);
 
+		c = new Train(med);
+		c.setZone(new Zone2D(w / 2 - 3 * w / 100, -10, 20, 100, 0, 10));
+		listColleague.add(c);
+		v = new TrainView(gui, (Train) c);
+		listViews.add(v);
+		
+		c = new Train(med);
+		c.setZone(new Zone2D(w / 2 - 3 * w / 100, h/2, 20, 100, 0, 10));
+		listColleague.add(c);
+		v = new TrainView(gui, (Train) c);
+		listViews.add(v);
+
+		/* horizontal vehciles */ 
+		
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(-10, h / 2 + 30, 50, 30, 3, 0));
+		c.setZone(new Zone2D(-20, h / 2 + 30, 50, 30, 8, 0));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);		
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/2 + 50, h / 2 + 30, 50, 30, 5, 0));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(5* w/6, h / 2 + 30, 50, 30, 3, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w + 10, h / 2 - 15, 50, 30, -3, 0));
+		c.setZone(new Zone2D(w + 20, h / 2 - 15, 50, 30, -9, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
-
+		
 		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/6, h / 2 - 15, 50, 30, -3, 0));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/2 - 100, h / 2 - 15, 50, 30, -6, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 
+		/* vertical vehicles on the left */ 
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/3 - 10, h / 6, 30, 50, 0, -3));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/3 - 10, h + 20, 30, 50, 0, -6));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/3 - 50, -20, 30, 50, 0, 6));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(w/3 - 50, 2*h/3 + 150, 30, 50, 0, 2));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		/* vertical vehicle on the right */
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(2*w/3 - 10, h / 3, 30, 50, 0, -3));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(2*w/3 - 10, 2*h/3, 30, 50, 0, -6));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(2*w/3 - 50, h/3, 30, 50, 0, 6));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+		
+		c = new Vehicle(med);
+		c.setZone(new Zone2D(2*w/3 - 50, 2*h/3 + 150, 30, 50, 0, 2));
+		listColleague.add(c);
+		v = new VehicleView(gui, (Vehicle) c);
+		listViews.add(v);
+
+		/* first series of pedestrian on the right */
+		
 		c = new Pedestrian(med);
-		c.setZone(new Zone2D(5 * w / 6, h, 25, 50, 0, -2.5));
+		c.setZone(new Zone2D(5 * w / 6 - 10, h, 25, 50, 0, -2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(5 * w / 6 - 10, h/4, 25, 50, 0, -2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(5 * w / 6 - 10, 3*h/4, 25, 50, 0, -2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(5 * w / 6 - 50, 3*h/4, 25, 50, 0, 2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(5 * w / 6 - 50, h/4, 25, 50, 0, 2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(5 * w / 6 - 50, h, 25, 50, 0, 2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		/* seconde series of pedestrian on the left */
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(w / 6 - 60, h, 25, 50, 0, 2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(w / 6 - 60, h/4, 25, 50, 0, 2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(w / 6 - 60, 3*h/4, 25, 50, 0, 2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(w / 6 - 20, h, 25, 50, 0, -2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(w / 6 - 20, h/4, 25, 50, 0, -2.0));
+		listColleague.add(c);
+		v = new PedestrianView(gui, (Pedestrian) c);
+		listViews.add(v);
+		
+		c = new Pedestrian(med);
+		c.setZone(new Zone2D(w / 6 - 20, 3*h/4, 25, 50, 0, -2.0));
 		listColleague.add(c);
 		v = new PedestrianView(gui, (Pedestrian) c);
 		listViews.add(v);

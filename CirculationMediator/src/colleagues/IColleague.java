@@ -22,6 +22,7 @@ public abstract class IColleague {
     protected KeepAliveData cachedData = new KeepAliveData(zone);
     protected IMediator mediator;
     protected boolean isExploded = false;
+    protected boolean isSignalisationAware = true;
 
     public boolean isExploded() {
 		return isExploded;
@@ -29,6 +30,14 @@ public abstract class IColleague {
 
 	public void setExploded(boolean isExploded) {
 		this.isExploded = isExploded;
+	}
+	
+	public boolean isSignalisationAware() {
+		return isSignalisationAware;
+	}
+
+	public void setSignalisationAware(boolean isSignalisationAware) {
+		this.isSignalisationAware = isSignalisationAware;
 	}
 
 	// Observable pour les vues
