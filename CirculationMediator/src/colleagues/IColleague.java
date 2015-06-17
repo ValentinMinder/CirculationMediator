@@ -21,8 +21,17 @@ public abstract class IColleague {
     protected Zone2D zone = new Zone2D(0, 0, 0, 0);
     protected KeepAliveData cachedData = new KeepAliveData(zone);
     protected IMediator mediator;
+    protected boolean isExploded = false;
 
-    // Observable pour les vues
+    public boolean isExploded() {
+		return isExploded;
+	}
+
+	public void setExploded(boolean isExploded) {
+		this.isExploded = isExploded;
+	}
+
+	// Observable pour les vues
     private final Observable viewObservable = new Observable() {
         @Override
         public void notifyObservers() {
