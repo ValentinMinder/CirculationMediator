@@ -116,7 +116,6 @@ public class Controller implements Runnable {
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(4 * w / 6 - w /20, -10, 30, 50, 0, 3));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
@@ -139,7 +138,7 @@ public class Controller implements Runnable {
 	// refresh des figures qui avancent
 	@Override
 	public void run() {
-		long interval = 100; // target: 40 = 1/25 sec
+		long interval = 200; // target: 40 = 1/25 sec
 		while (true) {
 			for (MovingColleague movingColleague : listColleague) {
 				movingColleague.issueKeepAlive();
