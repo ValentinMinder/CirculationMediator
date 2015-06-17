@@ -26,7 +26,7 @@ public abstract class View implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        parent.repaint();
+        //parent.repaint(50);
     }
     
     public abstract void draw(Graphics g);

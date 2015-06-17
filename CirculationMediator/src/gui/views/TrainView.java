@@ -29,7 +29,7 @@ public class TrainView extends View {
                 null);
         
         if(train.isExploded()) {
-            g.drawImage(Images.imgTrain,
+            g.drawImage(Images.imgExplosion,
                 train.getX(),
                 train.getY(),
                 train.getWidth(),
