@@ -115,6 +115,14 @@ public class Zone2D {
 	public double getCoordY() {
 		return coordY;
 	}
+        
+        public double getDeltaX() {
+            return deltaX;
+        }
+        
+        public double getDeltaY() {
+            return deltaY;
+        }
 
 	public void setCoordY(double coordY) {
 		this.coordY = coordY;
