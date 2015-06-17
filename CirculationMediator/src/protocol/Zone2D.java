@@ -1,5 +1,7 @@
 package protocol;
 
+import gui.BackgroundImagePanel;
+
 /**
  * Represent a 2D zone with coordinates, and moving vector.
  *
@@ -86,27 +88,10 @@ public class Zone2D {
 			nextLargeurY += deltaY;
 		}
 		
-		double nextCoordXOTHER = other.coordX;
-		double nextCoordYOTHER = other.coordY;
-		double nextLargeurXOTHER = other.largeurX;
-		double nextLargeurYOTHER = other.largeurY;
-		
-		if (other.deltaX < 0) {
-			nextCoordXOTHER += other.deltaX;
-		} else {
-			nextLargeurXOTHER += other.deltaX;
-		}
-
-		if (other.deltaY < 0) {
-			nextCoordYOTHER += other.deltaY;
-		} else {
-			nextLargeurYOTHER += other.deltaY;
-		}
-
-		if (nextCoordX <= nextCoordXOTHER + nextLargeurXOTHER
-				&& nextCoordX + nextLargeurX >= nextCoordXOTHER
-				&& nextCoordY <= nextCoordYOTHER + nextLargeurYOTHER
-				&& nextCoordY + nextLargeurY >= nextCoordYOTHER) {
+		if (nextCoordX <= other.coordX + other.largeurX
+				&& nextCoordX + nextLargeurX >= other.coordX
+				&& nextCoordY <= other.coordY + other.largeurY
+				&& nextCoordY + nextLargeurY >= other.coordY) {
 			return true;
 		}
 		return false;
@@ -115,9 +100,21 @@ public class Zone2D {
 	/**
 	 * Move this zone with its direction (without any checking).
 	 */
+	private static double epsilon = 50.0; // 50 pixels de marges avant de revenir de l'autre côté
 	public void move() {
 		coordX += deltaX;
 		coordY += deltaY;
+		if (coordX < 0 - epsilon) {
+			coordX = BackgroundImagePanel.BACKGROUND_WIDTH + epsilon;
+		} else if (coordX > BackgroundImagePanel.BACKGROUND_WIDTH + epsilon) {
+			coordX = 0 - epsilon;
+		}
+		
+		if (coordY < 0 - epsilon) {
+			coordY = BackgroundImagePanel.BACKGROUND_HEIGTH + epsilon;
+		} else if (coordY > BackgroundImagePanel.BACKGROUND_HEIGTH + epsilon) {
+			coordY = 0 - epsilon;
+		}
 	}
 
 	/* GETTERS & SETTERS */
