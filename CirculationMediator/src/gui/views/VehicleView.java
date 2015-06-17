@@ -19,6 +19,7 @@ public class VehicleView extends View {
     private static BufferedImage imgVehicleEast;
     private static BufferedImage imgVehicleSouth;
     private static BufferedImage imgVehicleWest;
+    private static BufferedImage imgExplosion;
 
     static {
         try {
@@ -26,6 +27,7 @@ public class VehicleView extends View {
             imgVehicleEast = ImageIO.read(new File("imgVehicleEast.png"));
             imgVehicleWest = ImageIO.read(new File("imgVehicleWest.png"));
             imgVehicleSouth = ImageIO.read(new File("imgVehicleSouth.png"));
+            imgExplosion = ImageIO.read(new File("explosion.png"));
         } catch (IOException ex) {
             Logger.getLogger(PedestrianView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,12 +51,16 @@ public class VehicleView extends View {
             i = imgVehicleSouth;
         else
             i = imgVehicleNorth;
-                
+        
         g.drawImage(i,
                 vehicle.getX(),
                 vehicle.getY(),
                 vehicle.getWidth(),
                 vehicle.getHeight(),
                 null);
+        
+        if(vehicle.isExploded()) {
+            g.drawImage(imgExplosion, vehicle.getX(), vehicle.getY(), vehicle.getWidth(), vehicle.getHeight(), null)
+        }
     }
 }
