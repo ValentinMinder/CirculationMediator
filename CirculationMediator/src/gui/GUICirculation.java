@@ -2,8 +2,6 @@ package gui;
 
 import gui.views.View;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JFrame;
 

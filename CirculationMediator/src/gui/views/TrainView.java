@@ -15,6 +15,5 @@ public class TrainView extends View {
     
     @Override
     public void draw(Graphics g) {
-        // TODO
     }
 }

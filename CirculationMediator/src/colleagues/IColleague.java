@@ -98,4 +98,20 @@ public abstract class IColleague {
     public void switchMove(boolean stopped) {
         // does nothing.
     }
+    
+    public int getX() {
+        return (int)zone.getCoordX();
+    }
+    
+    public int getY() {
+        return (int)zone.getCoordY();
+    }
+    
+    public int getWidth() {
+        return (int)zone.getLargeurX();
+    }
+    
+    public int getHeight() {
+        return (int)zone.getLargeurY();
+    }
 }

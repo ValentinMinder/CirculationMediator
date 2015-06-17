@@ -11,8 +11,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class PedestrianView extends View {
+
     private final Pedestrian pedestrian;
-    
+
     private static BufferedImage imgPedestrian;
 
     static {
@@ -22,7 +23,7 @@ public class PedestrianView extends View {
             Logger.getLogger(PedestrianView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public PedestrianView(GUICirculation parent, Pedestrian pedestrian) {
         super(parent, pedestrian);
         this.pedestrian = pedestrian;
@@ -31,11 +32,11 @@ public class PedestrianView extends View {
     @Override
     public void draw(Graphics g) {
         g.drawImage(
-                imgPedestrian, 
-                (int)pedestrian.getZone().getCoordX(), 
-                (int)pedestrian.getZone().getCoordY(),
-                (int)pedestrian.getZone().getLargeurX(),
-                (int)pedestrian.getZone().getLargeurY(),
+                imgPedestrian,
+                pedestrian.getX(),
+                pedestrian.getX(),
+                pedestrian.getWidth(),
+                pedestrian.getHeight(),
                 null);
-    }   
+    }
 }

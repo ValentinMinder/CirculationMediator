@@ -11,8 +11,8 @@ import colleagues.*;
 
 public class Controller implements Runnable {
 
-	private List<MovingColleague> listColleague = new LinkedList<MovingColleague>();
-	private List<View> listViews = new LinkedList<View>();
+	private final List<MovingColleague> listColleague = new LinkedList<>();
+	private final List<View> listViews = new LinkedList<>();
 
 	public List<View> getListViews() {
 		return listViews;
@@ -130,7 +130,7 @@ public class Controller implements Runnable {
 	// refresh des figures qui avancent
 	@Override
 	public void run() {
-		long interval = 500; // target: 40 = 1/25 sec
+		long interval = 100; // target: 40 = 1/25 sec
 		while (true) {
 			for (MovingColleague movingColleague : listColleague) {
 				movingColleague.move();
