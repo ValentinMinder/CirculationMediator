@@ -34,7 +34,7 @@ public class PedestrianView extends View {
         g.drawImage(
                 imgPedestrian,
                 pedestrian.getX(),
-                pedestrian.getX(),
+                pedestrian.getY(),
                 pedestrian.getWidth(),
                 pedestrian.getHeight(),
                 null);

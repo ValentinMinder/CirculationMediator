@@ -1,8 +1,8 @@
 package gui.views;
 
-import colleagues.MovingColleague;
 import colleagues.Train;
 import gui.GUICirculation;
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class TrainView extends View {
@@ -15,5 +15,7 @@ public class TrainView extends View {
     
     @Override
     public void draw(Graphics g) {
+        g.setColor(Color.blue);
+        g.fillRect(train.getX(), train.getY(), train.getWidth(), train.getHeight());
     }
 }
