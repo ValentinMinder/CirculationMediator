@@ -20,9 +20,9 @@ public class Images {
     static {
         try {
             imgVehicleEast = ImageIO.read(new File("imgVehicleEast.png"));
-            imgVehicleNorth = ImageIO.read(new File("imgVehicleEast.png"));
-            imgVehicleSouth = ImageIO.read(new File("imgVehicleEast.png"));
-            imgVehicleWest = ImageIO.read(new File("imgVehicleEast.png"));
+            imgVehicleNorth = ImageIO.read(new File("imgVehicleNorth.png"));
+            imgVehicleSouth = ImageIO.read(new File("imgVehicleSouth.png"));
+            imgVehicleWest = ImageIO.read(new File("imgVehicleWest.png"));
             imgPedestrian = ImageIO.read(new File("imgPedestrian.png"));
             imgTrain = ImageIO.read(new File("trainlong.png"));
             imgExplosion = ImageIO.read(new File("explosion.png"));
