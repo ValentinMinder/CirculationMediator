@@ -64,24 +64,28 @@ public class Controller implements Runnable {
 				h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		traffic = new TrafficLight(lightMed);
 		traffic.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, 4 * h / 9 + 2 * h / 9
 				/ 3, h / 9 / 3, h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		traffic = new TrafficLight(lightMed);
 		traffic.setZone(new Zone2D(4 * w / 6, 4 * h / 9 + h / 9 / 3, h / 9 / 3,
 				h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		traffic = new TrafficLight(lightMed);
 		traffic.setZone(new Zone2D(4 * w / 6 + 2 * h / 9 / 3, 4 * h / 9 + h / 9
 				/ 3, h / 9 / 3, h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		/* VEHICLES & OTHER MOVING */
 
@@ -125,6 +129,11 @@ public class Controller implements Runnable {
 
 		// TODO: add barrieres +
 		// zones de contact pour priorité droite et passage piéton.
+		
+		// register des collegues
+		for (MovingColleague movingColleague : listColleague) {
+			med.registerColleague(movingColleague);
+		}
 	}
 
 	// refresh des figures qui avancent
@@ -133,8 +142,13 @@ public class Controller implements Runnable {
 		long interval = 100; // target: 40 = 1/25 sec
 		while (true) {
 			for (MovingColleague movingColleague : listColleague) {
+				movingColleague.issueKeepAlive();
+			}
+			
+			for (MovingColleague movingColleague : listColleague) {
 				movingColleague.move();
 			}
+			listColleague.get(0).notifyMove();
 			try {
 				Thread.sleep(interval);
 			} catch (InterruptedException e) {
