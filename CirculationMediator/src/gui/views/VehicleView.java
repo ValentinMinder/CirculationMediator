@@ -1,10 +1,8 @@
 package gui.views;
 
-import colleagues.IColleague;
 import colleagues.Vehicle;
 import gui.GUICirculation;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -60,16 +58,13 @@ public class VehicleView extends View {
                 null);
         
         if(vehicle.isExploded()) {
-<<<<<<< HEAD
             g.drawImage(imgExplosion,
                     vehicle.getX(), 
                     vehicle.getY(), 
                     vehicle.getWidth(), 
                     vehicle.getHeight(), 
                     null);
-=======
             g.drawImage(imgExplosion, vehicle.getX(), vehicle.getY(), vehicle.getWidth(), vehicle.getHeight(), null);
->>>>>>> 1b940a89b147200fb8e27d3fc9fcc68a67501434
         }
     }
 }
