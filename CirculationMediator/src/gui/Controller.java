@@ -64,55 +64,58 @@ public class Controller implements Runnable {
 				h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		traffic = new TrafficLight(lightMed);
 		traffic.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, 4 * h / 9 + 2 * h / 9
 				/ 3, h / 9 / 3, h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		traffic = new TrafficLight(lightMed);
 		traffic.setZone(new Zone2D(4 * w / 6, 4 * h / 9 + h / 9 / 3, h / 9 / 3,
 				h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		traffic = new TrafficLight(lightMed);
 		traffic.setZone(new Zone2D(4 * w / 6 + 2 * h / 9 / 3, 4 * h / 9 + h / 9
 				/ 3, h / 9 / 3, h / 9 / 3));
 		v = new TrafficLightView(gui, traffic);
 		listViews.add(v);
+		med.registerColleague(traffic);
 
 		/* VEHICLES & OTHER MOVING */
 
 		MovingColleague c;
 
 		c = new Train(med);
-		c.setZone(new Zone2D(w / 2 - 10, h, 20, 100, 0, -10));
+		c.setZone(new Zone2D(w / 2 - w/100, h, 20, 100, 0, -10));
 		listColleague.add(c);
 		v = new TrainView(gui, (Train) c);
 		listViews.add(v);
 
 		c = new Train(med);
-		c.setZone(new Zone2D(w / 2 - 10, -100, 20, 100, 0, 10));
+		c.setZone(new Zone2D(w / 2 - 3* w / 100, -100, 20, 100, 0, 10));
 		listColleague.add(c);
 		v = new TrainView(gui, (Train) c);
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(-10, h / 2 + 30, 90, 45, 3, 0));
+		c.setZone(new Zone2D(-10, h / 2 + 30, 50, 30, 3, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(w + 10, h / 2 - 25, 90, 45, -3, 0));
+		c.setZone(new Zone2D(w + 10, h / 2 - 15, 50, 30, -3, 0));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
 
 		c = new Vehicle(med);
-		c.setZone(new Zone2D(4 * w / 6 + h / 9 / 3, -10, 45, 90, 0, 3));
 		listColleague.add(c);
 		v = new VehicleView(gui, (Vehicle) c);
 		listViews.add(v);
@@ -125,16 +128,26 @@ public class Controller implements Runnable {
 
 		// TODO: add barrieres +
 		// zones de contact pour priorité droite et passage piéton.
+		
+		// register des collegues
+		for (MovingColleague movingColleague : listColleague) {
+			med.registerColleague(movingColleague);
+		}
 	}
 
 	// refresh des figures qui avancent
 	@Override
 	public void run() {
-		long interval = 100; // target: 40 = 1/25 sec
+		long interval = 200; // target: 40 = 1/25 sec
 		while (true) {
+			for (MovingColleague movingColleague : listColleague) {
+				movingColleague.issueKeepAlive();
+			}
+			
 			for (MovingColleague movingColleague : listColleague) {
 				movingColleague.move();
 			}
+			listColleague.get(0).notifyMove();
 			try {
 				Thread.sleep(interval);
 			} catch (InterruptedException e) {

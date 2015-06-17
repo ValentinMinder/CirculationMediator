@@ -60,12 +60,16 @@ public class VehicleView extends View {
                 null);
         
         if(vehicle.isExploded()) {
+<<<<<<< HEAD
             g.drawImage(imgExplosion,
                     vehicle.getX(), 
                     vehicle.getY(), 
                     vehicle.getWidth(), 
                     vehicle.getHeight(), 
                     null);
+=======
+            g.drawImage(imgExplosion, vehicle.getX(), vehicle.getY(), vehicle.getWidth(), vehicle.getHeight(), null);
+>>>>>>> 1b940a89b147200fb8e27d3fc9fcc68a67501434
         }
     }
 }

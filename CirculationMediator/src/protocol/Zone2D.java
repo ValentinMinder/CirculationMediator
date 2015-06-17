@@ -85,11 +85,28 @@ public class Zone2D {
 		} else {
 			nextLargeurY += deltaY;
 		}
+		
+		double nextCoordXOTHER = other.coordX;
+		double nextCoordYOTHER = other.coordY;
+		double nextLargeurXOTHER = other.largeurX;
+		double nextLargeurYOTHER = other.largeurY;
+		
+		if (other.deltaX < 0) {
+			nextCoordXOTHER += other.deltaX;
+		} else {
+			nextLargeurXOTHER += other.deltaX;
+		}
 
-		if (nextCoordX <= other.coordX + other.largeurX
-				&& nextCoordX + nextLargeurX >= other.coordX
-				&& nextCoordY <= other.coordY + other.largeurY
-				&& nextCoordY + nextLargeurY >= other.coordY) {
+		if (other.deltaY < 0) {
+			nextCoordYOTHER += other.deltaY;
+		} else {
+			nextLargeurYOTHER += other.deltaY;
+		}
+
+		if (nextCoordX <= nextCoordXOTHER + nextLargeurXOTHER
+				&& nextCoordX + nextLargeurX >= nextCoordXOTHER
+				&& nextCoordY <= nextCoordYOTHER + nextLargeurYOTHER
+				&& nextCoordY + nextLargeurY >= nextCoordYOTHER) {
 			return true;
 		}
 		return false;

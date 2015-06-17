@@ -1,6 +1,7 @@
 package mediator;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 import colleagues.IColleague;
 import colleagues.TrafficLight;
@@ -16,6 +17,7 @@ public class TrafficLightMediator extends CirculationMediator {
 
 	public TrafficLightMediator(GeneralMediator superMediator, Zone2D zone) {
 		super(superMediator, zone);
+		lights = new LinkedList<TrafficLight>();
 	}
 	
 	@Override
@@ -28,6 +30,10 @@ public class TrafficLightMediator extends CirculationMediator {
 				return;
 			}
 		}
+	}
+	
+	public void addTrafficLight(TrafficLight light) {
+		lights.add(light);
 	}
 	
 	private void makeOtherRed (TrafficLight otherLight ){

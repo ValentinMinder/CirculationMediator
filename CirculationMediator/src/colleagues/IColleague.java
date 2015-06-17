@@ -21,8 +21,17 @@ public abstract class IColleague {
     protected Zone2D zone = new Zone2D(0, 0, 0, 0);
     protected KeepAliveData cachedData = new KeepAliveData(zone);
     protected IMediator mediator;
+    protected boolean isExploded = false;
 
-    // Observable pour les vues
+    public boolean isExploded() {
+		return isExploded;
+	}
+
+	public void setExploded(boolean isExploded) {
+		this.isExploded = isExploded;
+	}
+
+	// Observable pour les vues
     private final Observable viewObservable = new Observable() {
         @Override
         public void notifyObservers() {
@@ -46,18 +55,14 @@ public abstract class IColleague {
     }
 
     /**
-     * sends a keepalive to the mediator
+     * sends a keepalive to the mediator (only for moving colleagues)
      */
     public void issueKeepAlive() {
-        mediator.keepAlive(this, cachedData);
+    	// non-moving dont issue keepalive
     }
 
     public void receiveKeepAlive(KeepAliveData data) {
-        if (data.getZone().isContainedIn(zone)) {
-			// woooups... accident!
-            // TODO: destroy / stop / images / ...
-            System.out.println(this + " - Accdident");
-        }
+        // dont care if non-moving...
     }
 
     public Zone2D getZone() {
